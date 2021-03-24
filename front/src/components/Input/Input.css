@@ -1,0 +1,12 @@
+.input {
+  box-sizing: border-box;
+  padding: 10px 25px;
+  border: 2px solid #95A3B3;
+  font-size: 18px;
+  border-radius: 5px;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
