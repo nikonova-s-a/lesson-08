@@ -1,0 +1,16 @@
+.form {
+  width: 500px;
+  margin: auto;
+  border-radius: 5px;
+  background: #FFFFFF;
+
+  &__header {
+    font-size: 26px;
+  }
+}
+
+.form, .form__items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
