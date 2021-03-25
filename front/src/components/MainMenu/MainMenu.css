@@ -5,12 +5,12 @@
   &__item {
     display: block;
     padding: 20px 50px;
-    color: #95A3B3;
+    color: $grey;
     text-decoration: none;
 
     &_active {
-      color: #4B4E6D;
-      border-bottom: 5px solid #4B4E6D;
+      color: $darkBlue;
+      border-bottom: 5px solid $darkBlue;
     }
   }
 }
