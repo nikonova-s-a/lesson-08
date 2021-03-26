@@ -9,12 +9,12 @@ interface Props {
 
 const b = block('form')
 
-export const Form: React.FC<Props> = (props) => {
+export const Form: React.FC<Props> = ({ header, className = '', children }) => {
   return (
-    <form className={b() + ' ' + props.className}>
-      <h2 className={b('header')}>{props.header}</h2>
+    <form className={b() + ' ' + className}>
+      <h2 className={b('header')}>{header}</h2>
       <div className={b('items')}>
-        { props.children }
+        {children}
       </div>
     </form>
   )

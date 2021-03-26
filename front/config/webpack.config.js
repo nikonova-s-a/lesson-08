@@ -134,7 +134,7 @@ module.exports = function (webpackEnv) {
               }),
               require('postcss-simple-vars')({ 
                 silent: true,
-                variables: require('./colors')
+                variables: require('../src/config/colors')
               }),
               // Adds PostCSS Normalize as the reset css with default options,
               // so that it honors browserslist config in package.json

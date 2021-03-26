@@ -9,6 +9,6 @@ interface Props {
 
 const b = block('button')
 
-export const Button: React.FC<Props> = (props) => (
-  <button className={b() + ' ' + props.className}>{props.text}</button>
+export const Button: React.FC<Props> = ({ text, className = '' }) => (
+  <button className={b() + ' ' + className}>{text}</button>
 )

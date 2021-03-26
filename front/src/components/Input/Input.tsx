@@ -10,9 +10,13 @@ interface Props {
 
 const b = block('input')
 
-export const Input: React.FC<Props> = (props) => (
-  <input className={b() + ' ' + props.className} 
-    type={props.type} 
-    placeholder={props.placeholder}
+export const Input: React.FC<Props> = ({
+  type,
+  placeholder = '',
+  className = ''
+}) => (
+  <input className={b() + ' ' + className}
+    type={type}
+    placeholder={placeholder}
   />
 )

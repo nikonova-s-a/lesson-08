@@ -11,7 +11,7 @@ export const MainMenu: React.FC<Props> = () => {
   return (
     <nav className={b()}>
       <a href="/catalog" className={b('item')}>Каталог</a>
-      <a href="/ref" className={b('item_active') + " " + b('item')}>Справочники</a>
+      <a href="/ref" className={b('item', { active: true })}>Справочники</a>
     </nav>
   )
 }
