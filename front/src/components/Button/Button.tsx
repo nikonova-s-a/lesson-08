@@ -9,6 +9,7 @@ interface Props extends BaseComponentProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   htmlType?: 'submit' | 'reset' | 'button'
+  className?: string;
 }
 
 const b = block('button')

@@ -93,7 +93,8 @@
     "postcss-nested": "^5.0.5",
     "postcss-normalize": "^9.0.0",
     "postcss-preset-env": "^6.7.0",
-    "postcss-safe-parser": "^5.0.2"
+    "postcss-safe-parser": "^5.0.2",
+    "postcss-simple-vars": "^6.0.3"
   },
   "eslintConfig": {
     "extends": [

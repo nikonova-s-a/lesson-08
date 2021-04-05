@@ -15,6 +15,7 @@ interface Props extends BaseComponentProps {
   error?: string;
   placeholder?: string;
   disabled?: boolean;
+  className?: string;
 }
 
 const b = block('input')
