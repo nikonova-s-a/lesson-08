@@ -3,9 +3,10 @@
   align-items: center;
   justify-content: center;
   padding: 16px 8px 12px;
-  height: 40px;
+  height: 70px;
   background: $black;
   color: $white;
+  box-sizing: border-box;
 
   &__title {
     text-align: center;

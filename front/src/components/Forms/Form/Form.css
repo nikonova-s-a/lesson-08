@@ -1,6 +1,4 @@
 .form {
-  width: 500px;
-  margin: auto;
   border-radius: 5px;
   background: $white;
 
@@ -13,4 +11,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.field {
+  margin-bottom: 15px;
+  width: 400px;
+}
+
+.button {
+  margin: 20px;
 }

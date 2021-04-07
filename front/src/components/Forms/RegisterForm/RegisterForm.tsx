@@ -6,12 +6,12 @@ import * as Yup from 'yup'
 import { appActions } from '../../../store/app/actions'
 import { AppState } from '../../../store/app/types'
 import { RootState } from '../../../store/types'
-import { Auth } from '../../../types/auth'
+import { User } from '../../../types/user'
 import { Button } from '../../Button/Button'
 import { Input } from '../../Input/Input'
 import { InputType } from '../../Input/InputType'
 import { Form } from '../Form/Form'
-import './AuthForm.css'
+import './RegisterForm.css'
 
 interface StateProps {
   loading: boolean;
@@ -26,22 +26,26 @@ interface OwnProps {
 
 type Props = OwnProps & StateProps & DispatchProps
 
-const b = block('auth-form')
+const b = block('register-form')
 
-const schema: Yup.SchemaOf<Auth.Login.Params> = Yup.object().shape(({
+const schema: Yup.SchemaOf<User.Create.Param> = Yup.object().shape(({
   login: Yup.string().required(),
-  password: Yup.string().required()
+  email: Yup.string().email().required(),
+  password: Yup.string().required(),
+  passwordConfirm: Yup.string().required()
 }))
 
-const AuthFormPresenter: React.FC<Props> = ({ loading, errorText, appLogin }) => {
-  const { errors, values, submitForm, handleChange } = useFormik<Auth.Login.Params>({
+const RegisterFormPresenter: React.FC<Props> = ({ loading, errorText, appRegister }) => {
+  const { errors, values, submitForm, handleChange } = useFormik<User.Create.Param>({
     initialValues: {
       login: '',
-      password: ''
+      email: '',
+      password: '',
+      passwordConfirm: ''
     },
     validationSchema: schema,
     onSubmit: async (fields) => {
-      await appLogin(fields)
+      await appRegister(fields)
     }
   })
 
@@ -51,14 +55,23 @@ const AuthFormPresenter: React.FC<Props> = ({ loading, errorText, appLogin }) =>
   }
 
   return (
-    <Form header="Login" className={b()}>
+    <Form header="Sign up" className={b()}>
       <Input
         className="field"
-        label={'Name'}
+        label={'Login'}
         name={'login'}
         value={values.login}
         onChange={handleChange}
         error={errors?.login}
+        disabled={loading}
+      />
+      <Input
+        className="field"
+        label={'Email'}
+        name={'email'}
+        value={values.email}
+        onChange={handleChange}
+        error={errors?.email}
         disabled={loading}
       />
       <Input
@@ -71,11 +84,18 @@ const AuthFormPresenter: React.FC<Props> = ({ loading, errorText, appLogin }) =>
         error={errors?.password}
         disabled={loading}
       />
+      <Input
+        className="field"
+        label={'Confirm Password'}
+        name={'passwordConfirm'}
+        htmlType={InputType.Password}
+        value={values.passwordConfirm}
+        onChange={handleChange}
+        error={errors?.passwordConfirm}
+        disabled={loading}
+      />
       {!!errorText && <p className={'error'}>{errorText}</p>}
-      <div className={b('buttons')}>
-        <Button text={'Sign up'} disabled={loading} className={b('button')} />
-        <Button text={'Log in'} onClick={handlerSubmit} disabled={loading} className={b('button')} />
-      </div>
+      <Button text={'Sign up'} onClick={handlerSubmit} disabled={loading} className="button" />
     </Form>
   )
 }
@@ -87,4 +107,4 @@ const mapStateToProps: MapStateToProps<StateProps, OwnProps, RootState.State> = 
 
 const mapDispatchToProp: MapDispatchToProps<DispatchProps, OwnProps> = { ...appActions }
 
-export const AuthForm = connect(mapStateToProps, mapDispatchToProp)(AuthFormPresenter)
+export const RegisterForm = connect(mapStateToProps, mapDispatchToProp)(RegisterFormPresenter)

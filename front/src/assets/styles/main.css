@@ -10,3 +10,9 @@ body {
 #root {
   height: 100vh;
 }
+
+.error {
+  margin: 5px;
+  font-size: 18px;
+  color: $redError;
+}

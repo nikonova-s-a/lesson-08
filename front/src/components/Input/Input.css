@@ -1,12 +1,30 @@
 .input {
-  box-sizing: border-box;
-  padding: 10px 25px;
-  border: 2px solid $grey;
   font-size: 18px;
-  border-radius: 5px;
-  outline: none;
 
   &:hover {
     cursor: pointer;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    padding: 10px;
+  }
+
+  &__item {
+    box-sizing: border-box;
+    padding: 10px;
+    border: 2px solid $grey;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+  }
+
+  &__error {
+    margin: 5px;
+    color: $redError;
   }
 }

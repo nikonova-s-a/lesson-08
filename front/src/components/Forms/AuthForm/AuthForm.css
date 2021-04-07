@@ -1,3 +1,8 @@
-.auth-form {
+.auth-form  { 
+  width: 500px;
 
+  &__buttons {
+    display: flex;
+    justify-content: flex-start;
+  }
 }
