@@ -1,11 +1,10 @@
 import block from 'bem-cn'
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { BaseComponentProps } from '../../../types/base'
 import './Form.css'
 
 interface Props extends BaseComponentProps {
   header?: string;
-  children: ReactNode;
 }
 
 const b = block('form')

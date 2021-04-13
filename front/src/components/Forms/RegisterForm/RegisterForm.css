@@ -7,13 +7,6 @@
     width: 400px;
   }
 
-  &__buttons {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: flex-start;
-  }
-
   &__button {
     margin-left: 20px;
   }

@@ -1,8 +1,17 @@
 .auth-form  { 
   width: 500px;
 
+   &__field {
+    margin-bottom: 15px;
+    width: 400px;
+  }
+
   &__buttons {
     display: flex;
     justify-content: flex-start;
+  }
+
+  &__button {
+    margin: 20px;
   }
 }

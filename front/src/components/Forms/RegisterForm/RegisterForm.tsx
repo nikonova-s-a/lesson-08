@@ -3,11 +3,12 @@ import { useFormik } from 'formik'
 import React, { MouseEventHandler } from 'react'
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
 import * as Yup from 'yup'
-import { appActions } from '../../../store/app/actions'
+import { appRegister } from '../../../store/app/actions'
 import { AppState } from '../../../store/app/types'
 import { RootState } from '../../../store/types'
 import { User } from '../../../types/user'
 import { Button } from '../../Button/Button'
+import { FormError } from '../../FormError/FormError'
 import { Input } from '../../Input/Input'
 import { InputType } from '../../Input/InputType'
 import { Form } from '../Form/Form'
@@ -18,7 +19,8 @@ interface StateProps {
   errorText: string;
 }
 
-interface DispatchProps extends AppState.ActionThunk {
+interface DispatchProps {
+  appRegister: AppState.ActionThunk.AppRegister;
 }
 
 interface OwnProps {
@@ -32,7 +34,7 @@ const schema: Yup.SchemaOf<User.Create.Param> = Yup.object().shape(({
   login: Yup.string().required(),
   email: Yup.string().email().required(),
   password: Yup.string().required(),
-  passwordConfirm: Yup.string().required()
+  passwordConfirm: Yup.string().oneOf([Yup.ref('password')], 'Пароли не совпадают').required()
 }))
 
 const RegisterFormPresenter: React.FC<Props> = ({ loading, errorText, appRegister }) => {
@@ -57,7 +59,7 @@ const RegisterFormPresenter: React.FC<Props> = ({ loading, errorText, appRegiste
   return (
     <Form header="Sign up" className={b()}>
       <Input
-        className="field"
+        className={b('field')}
         label={'Login'}
         name={'login'}
         value={values.login}
@@ -66,7 +68,7 @@ const RegisterFormPresenter: React.FC<Props> = ({ loading, errorText, appRegiste
         disabled={loading}
       />
       <Input
-        className="field"
+        className={b('field')}
         label={'Email'}
         name={'email'}
         value={values.email}
@@ -75,7 +77,7 @@ const RegisterFormPresenter: React.FC<Props> = ({ loading, errorText, appRegiste
         disabled={loading}
       />
       <Input
-        className="field"
+        className={b('field')}
         label={'Password'}
         name={'password'}
         htmlType={InputType.Password}
@@ -85,7 +87,7 @@ const RegisterFormPresenter: React.FC<Props> = ({ loading, errorText, appRegiste
         disabled={loading}
       />
       <Input
-        className="field"
+        className={b('field')}
         label={'Confirm Password'}
         name={'passwordConfirm'}
         htmlType={InputType.Password}
@@ -94,7 +96,7 @@ const RegisterFormPresenter: React.FC<Props> = ({ loading, errorText, appRegiste
         error={errors?.passwordConfirm}
         disabled={loading}
       />
-      {!!errorText && <p className={'error'}>{errorText}</p>}
+      {!!errorText && <FormError>{errorText}</FormError>}
       <Button text={'Sign up'} onClick={handlerSubmit} disabled={loading} className="button" />
     </Form>
   )
@@ -105,6 +107,6 @@ const mapStateToProps: MapStateToProps<StateProps, OwnProps, RootState.State> = 
   errorText: app.errorText
 })
 
-const mapDispatchToProp: MapDispatchToProps<DispatchProps, OwnProps> = { ...appActions }
+const mapDispatchToProp: MapDispatchToProps<DispatchProps, OwnProps> = { appRegister }
 
 export const RegisterForm = connect(mapStateToProps, mapDispatchToProp)(RegisterFormPresenter)

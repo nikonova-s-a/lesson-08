@@ -58,7 +58,7 @@ export const Input: React.FC<Props> = ({
           disabled={disabled}
         />
       </div>
-      {!!error && <p className="error">{error}</p>}
+      {!!error && <p className={b('error')}>{error}</p>}
     </div>
   )
 }

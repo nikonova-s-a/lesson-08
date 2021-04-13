@@ -3,11 +3,13 @@ import { useFormik } from 'formik'
 import React, { MouseEventHandler } from 'react'
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux'
 import * as Yup from 'yup'
-import { appActions } from '../../../store/app/actions'
+import { browserHistory } from '../../../browserHistory'
+import { appLogin } from '../../../store/app/actions'
 import { AppState } from '../../../store/app/types'
 import { RootState } from '../../../store/types'
 import { Auth } from '../../../types/auth'
 import { Button } from '../../Button/Button'
+import { FormError } from '../../FormError/FormError'
 import { Input } from '../../Input/Input'
 import { InputType } from '../../Input/InputType'
 import { Form } from '../Form/Form'
@@ -18,7 +20,8 @@ interface StateProps {
   errorText: string;
 }
 
-interface DispatchProps extends AppState.ActionThunk {
+interface DispatchProps  {
+  appLogin: AppState.ActionThunk.AppLogin;
 }
 
 interface OwnProps {
@@ -50,10 +53,14 @@ const AuthFormPresenter: React.FC<Props> = ({ loading, errorText, appLogin }) =>
     submitForm().catch()
   }
 
+  const onRegisterButtonClick = () => {
+    browserHistory.push('/register')
+  }
+
   return (
     <Form header="Login" className={b()}>
       <Input
-        className="field"
+        className={b('field')}
         label={'Name'}
         name={'login'}
         value={values.login}
@@ -62,7 +69,7 @@ const AuthFormPresenter: React.FC<Props> = ({ loading, errorText, appLogin }) =>
         disabled={loading}
       />
       <Input
-        className="field"
+        className={b('field')}
         label={'Password'}
         name={'password'}
         htmlType={InputType.Password}
@@ -71,10 +78,20 @@ const AuthFormPresenter: React.FC<Props> = ({ loading, errorText, appLogin }) =>
         error={errors?.password}
         disabled={loading}
       />
-      {!!errorText && <p className={'error'}>{errorText}</p>}
+      {!!errorText && <FormError>{errorText}</FormError>}
       <div className={b('buttons')}>
-        <Button text={'Sign up'} disabled={loading} className={b('button')} />
-        <Button text={'Log in'} onClick={handlerSubmit} disabled={loading} className={b('button')} />
+        <Button 
+          text={'Sign up'} 
+          disabled={loading} 
+          className={b('button')} 
+          onClick={onRegisterButtonClick}
+        />
+        <Button 
+          text={'Log in'} 
+          onClick={handlerSubmit} 
+          disabled={loading} 
+          className={b('button')} 
+        />
       </div>
     </Form>
   )
@@ -85,6 +102,6 @@ const mapStateToProps: MapStateToProps<StateProps, OwnProps, RootState.State> = 
   errorText: app.errorText
 })
 
-const mapDispatchToProp: MapDispatchToProps<DispatchProps, OwnProps> = { ...appActions }
+const mapDispatchToProp: MapDispatchToProps<DispatchProps, OwnProps> = { appLogin }
 
 export const AuthForm = connect(mapStateToProps, mapDispatchToProp)(AuthFormPresenter)
