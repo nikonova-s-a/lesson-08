@@ -10,3 +10,14 @@ body {
 #root {
   height: 100vh;
 }
+
+.search-input {
+  width: 70%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.no-result {
+  text-align: center;
+  font-size: 20px;
+}

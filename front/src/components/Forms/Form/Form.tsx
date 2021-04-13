@@ -1,18 +1,18 @@
 import block from 'bem-cn'
 import React from 'react'
+import { BaseComponentProps } from '../../../types/base'
 import './Form.css'
 
-interface Props {
-  header: string;
-  className?: string;
+interface Props extends BaseComponentProps {
+  header?: string;
 }
 
 const b = block('form')
 
-export const Form: React.FC<Props> = ({ header, className = '', children }) => {
+export const Form: React.FC<Props> = ({ header = '', className = '', children }) => {
   return (
-    <form className={b() + ' ' + className}>
-      <h2 className={b('header')}>{header}</h2>
+    <form className={b({}).mix(className)}>
+      {!!header && <h2 className={b('header')}>{header}</h2>}
       <div className={b('items')}>
         {children}
       </div>

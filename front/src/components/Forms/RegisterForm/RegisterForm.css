@@ -1,0 +1,13 @@
+.register-form  {
+  margin: auto auto;
+  width: 500px;
+
+  &__field {
+    margin-bottom: 15px;
+    width: 400px;
+  }
+
+  &__button {
+    margin-left: 20px;
+  }
+}

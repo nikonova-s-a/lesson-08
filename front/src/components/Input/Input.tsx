@@ -49,7 +49,7 @@ export const Input: React.FC<Props> = ({
       <div className={b('container')}>
         {!!label && <label className={b('label')}>{label}</label>}
         <input
-          className={b('input')}
+          className={b('item')}
           value={currentValue}
           onChange={handlerChange}
           type={htmlType}
