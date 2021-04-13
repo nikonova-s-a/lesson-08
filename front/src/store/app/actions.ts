@@ -19,33 +19,28 @@ const appFetchError = (payload: string): AppState.Action.FetchError => ({
   payload
 })
 
-export const appActions: AppState.ActionThunk = {
-  appLogin: params => async (dispatch) => {
-    dispatch(appFetch())
+export const appLogin: AppState.ActionThunk.AppLogin = params => async (dispatch) => {
+  dispatch(appFetch());
 
-    try {
-      const tokenPair = await apiAuthLogin(params)
-      dispatch(appFetchSuccess(tokenPair))
-      browserHistory.push('/')
-    } catch (err) {
-      dispatch(appFetchError('Ошибка авторизации.'))
-    }
-  },
+  try {
+    const tokenPair = await apiAuthLogin(params);
+    dispatch(appFetchSuccess(tokenPair));
+    browserHistory.push('/')
+  } catch (err) {
+    dispatch(appFetchError('Ошибка авторизации.'));
+  }
+};
 
-  appRegister: params => async (dispatch) => {
-    dispatch(appFetch())
+export const appRegister: AppState.ActionThunk.AppRegister = params => async (dispatch) => {
+  dispatch(appFetch())
 
-    try {
-      const userData = await apiUserCreate(params)
-      const loginParams = {
-        login: params.login,
-        password: params.password
-      }
-      const tokenPair = await apiAuthLogin(loginParams)
-      dispatch(appFetchSuccess(tokenPair))
-      browserHistory.push('/')
-    } catch (err) {
-      dispatch(appFetchError('Ошибка регистрации.'))
-    }
+  try {
+    await apiUserCreate(params)
+    appLogin({
+      login: params.login,
+      password: params.password
+    })
+  } catch (err) {
+    dispatch(appFetchError('Ошибка регистрации.'))
   }
 }

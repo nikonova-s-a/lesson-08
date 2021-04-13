@@ -21,8 +21,8 @@ export declare namespace AppState {
     type All = Fetch | FetchSuccess | FetchError
   }
 
-  interface ActionThunk {
-    appLogin: Thunk<Auth.Login.Params>
-    appRegister: Thunk<User.Create.Param>
+  namespace ActionThunk {
+    type AppLogin = Thunk<Auth.Login.Params>
+    type AppRegister = Thunk<User.Create.Param>
   }
 }

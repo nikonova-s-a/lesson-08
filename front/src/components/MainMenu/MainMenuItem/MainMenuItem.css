@@ -1,0 +1,11 @@
+.main-menu-item {
+  display: block;
+  padding: 20px 50px;
+  color: $grey;
+  text-decoration: none;
+
+  &_active {
+    color: $darkBlue;
+    border-bottom: 5px solid $darkBlue;
+  }
+}
